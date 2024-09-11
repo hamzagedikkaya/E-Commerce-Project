@@ -9,7 +9,8 @@ This repository is for an ongoing e-commerce project. The project is being activ
 ## Current Status
 
 - **Initial Setup:** The project has been created with Ruby on Rails 7.2.1 and PostgreSQL.
-- **Migration:** Today, we created the first migration file and established the initial database schema. This is a foundational step, and the migration will be detailed and expanded as development progresses.
+- **Migration:** A few days ago, we created the first migration file and established the initial database schema. This was a foundational step, and the migration will be detailed and expanded as development progresses.
+- **Gem Installation:** After adding the first migration, we also installed some foundational gems to help streamline the development process. These gems will aid in various aspects such as authentication, asset management, and testing.
 
 ## Development
 
