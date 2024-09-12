@@ -59,3 +59,6 @@ end
 gem "haml-rails"
 gem "bootstrap", "~> 5.3.3"
 gem "sassc-rails"
+
+gem "devise"
+gem "letter_opener"
