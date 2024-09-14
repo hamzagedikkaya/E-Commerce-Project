@@ -1,0 +1,40 @@
+%nav.navbar.navbar-expand-lg.bg-light
+  .container
+    %a.navbar-brand{href: root_path} e-commerce
+    %button.navbar-toggler{type: "button", data: {bs_toggle: "collapse", bs_target: "#navbarNav"}, aria: {controls: "navbarNav", expanded: "false", label: "Toggle navigation"}}
+      %span.navbar-toggler-icon
+    .collapse.navbar-collapse{id: "navbarNav"}
+      .d-flex.flex-column.flex-lg-row.align-items-center.w-100
+        %form.d-flex{role: "search", style: "flex: 1; justify-content: center; margin-right: 30px;"}
+          %input.form-control{type: "search", placeholder: "Search", aria: {label: "Search"}, style: "max-width: 600px; height: 40px;"}
+          %button.btn.btn-outline-primary{type: "submit", style: "height: 40px;"}
+            %i.fas.fa-search{aria: "Search icon"}
+        .d-flex
+          %ul.navbar-nav.mb-2.mb-lg-0{style: "margin-left: auto;"}
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle{href: "#", role: "button", data: {bs_toggle: "dropdown"}, aria: {expanded: "false"}}
+                %i.fas.fa-user{aria: "User icon"}
+                = user_signed_in? ? "My Account" : "Sign In"
+              %ul.dropdown-menu.text-center{style: "min-width: 200px;"}
+                - if user_signed_in?
+                  %li
+                    = link_to 'Edit Profile', edit_user_registration_path, class: 'dropdown-item'
+                  %li
+                    = button_to 'Log Out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+                - else
+                  %li
+                    = link_to 'Sign In', new_user_session_path, class: 'dropdown-item'
+                  %li
+                    = link_to 'Sign Up', new_user_registration_path, class: 'dropdown-item'
+
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle{href: "#", role: "button", data: {bs_toggle: "dropdown"}, aria: {expanded: "false"}}
+                %i.fas.fa-shopping-cart{aria: "Shopping Cart icon"}
+                Shopping Cart
+              %ul.dropdown-menu
+                %li
+                  %a.dropdown-item{href: "#"} Alpha
+                %li
+                  %hr.dropdown-divider
+                %li
+                  %a.dropdown-item{href: "#"} Beta
