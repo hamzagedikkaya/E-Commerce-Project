@@ -16,7 +16,7 @@ For more details about the custom template and an in-depth explanation of how th
 
 Here’s the initial database model I’ve set up, although it's likely to change as the project grows and new requirements come into play:
 
-![Database Model](app/assets/images/db.png)
+![Database Model](app/assets/images/db.jpg)
 
 ---
 
