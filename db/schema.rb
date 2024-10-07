@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_17_141939) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_07_143547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,45 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_141939) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "attributes", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "values"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_attributes", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "attribute_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attribute_id"], name: "index_product_attributes_on_attribute_id"
+    t.index ["product_id"], name: "index_product_attributes_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "subcategory_id", null: false
+    t.bigint "brand_id", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -50,6 +89,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_141939) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "subcategories", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,6 +117,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_141939) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.string "name_surname"
+    t.string "gsm"
+    t.integer "gender"
+    t.date "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -88,4 +139,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_141939) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "product_attributes", "attributes"
+  add_foreign_key "product_attributes", "products"
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "subcategories"
+  add_foreign_key "subcategories", "categories"
 end
