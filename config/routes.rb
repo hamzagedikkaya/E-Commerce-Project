@@ -19,4 +19,10 @@ Rails.application.routes.draw do
       post "create_assignment"
     end
   end
+
+  resources :parameters, only: [ :index ]
+  resources :brands
+  resources :categories
+  resources :subcategories
+  resources :attributes
 end
