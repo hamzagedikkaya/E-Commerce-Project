@@ -30,7 +30,7 @@ class CreateCategoriesAndRelatedTables < ActiveRecord::Migration[7.2]
 
     create_table :attributes do |t|
       t.string :name, null: false
-      t.string :values
+      t.jsonb :values, default: [], null: false
 
       t.timestamps
     end
